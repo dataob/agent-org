@@ -183,7 +183,7 @@ Claude Code 훅으로 등록해 쓴다.
    ```json
    "hooks": {
      "UserPromptSubmit": [{"hooks": [{"type": "command", "command": "~/.agents/hooks/session-tidy.sh", "timeout": 10}]}],
-     "SessionStart": [{"matcher": "compact|clear", "hooks": [{"type": "command", "command": "~/.agents/hooks/session-tidy.sh", "timeout": 10}]}]
+     "SessionStart": [{"matcher": "startup|compact|clear", "hooks": [{"type": "command", "command": "~/.agents/hooks/session-tidy.sh", "timeout": 10}]}]
    }
    ```
 5. 홈 폴더에서 세션을 열면 비서관, 프로젝트 폴더에서 열면 PM으로 동작한다.

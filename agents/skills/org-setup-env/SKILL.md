@@ -29,7 +29,7 @@ agent-org 저장소의 일반 지침을 이 환경의 홈 폴더에 연결한다
    ```json
    "hooks": {
      "UserPromptSubmit": [{"hooks": [{"type": "command", "command": "~/.agents/hooks/session-tidy.sh", "timeout": 10}]}],
-     "SessionStart": [{"matcher": "compact|clear", "hooks": [{"type": "command", "command": "~/.agents/hooks/session-tidy.sh", "timeout": 10}]}]
+     "SessionStart": [{"matcher": "startup|compact|clear", "hooks": [{"type": "command", "command": "~/.agents/hooks/session-tidy.sh", "timeout": 10}]}]
    }
    ```
 6. **개인 기록 저장소**(선택): 홈을 원격 없는 git 저장소로 두고 `~/.agents/status.md`, `accounts.md`, `glossary-local.md`만 추적한다.
