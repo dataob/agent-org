@@ -36,7 +36,7 @@ for d in "$REPO"/agents/skills/*/; do
   link "agents/skills/$n" ".claude/skills/$n"
 done
 
-for f in status.md accounts.md glossary-local.md; do
+for f in status.md accounts.md glossary-local.md environment.md; do
   if [ ! -e "$HOME/.agents/$f" ]; then
     cp "$REPO/agents/templates/$f" "$HOME/.agents/$f"
     echo "만듦: ~/.agents/$f (틀에서 복사)"
