@@ -19,7 +19,8 @@ agent-org 저장소의 일반 지침을 이 환경의 홈 폴더에 연결한다
    ~/agent-org/install.sh
    ```
    - 링크: 전역 지침(`~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`), 플레이북, 코딩 원칙, 단어사전, `roles/`, `templates/`, 세션 정리 훅, 전역 스킬(`~/.agents/skills/<이름>`, `~/.claude/skills/<이름>`)
-   - 없을 때만 틀에서 복사: `~/.agents/status.md`, `accounts.md`, `glossary-local.md`
+   - 없을 때만 틀에서 복사: `~/.agents/status.md`, `accounts.md`, `glossary-local.md`, `environment.md`
+   - 설치 뒤 `environment.md`를 이 컴퓨터 사실로 채운다(잠자기·정전 후 동작·디스크 암호화·원격 접속·예약 작업). 모르는 것은 오너에게 묻고, 확인 못 한 것은 "확인 안 함"
 4. **비밀 값 파일**: 오너가 직접 만든다. 에이전트는 값을 적거나 열지 않는다.
    ```bash
    mkdir -p ~/.config/secrets && touch ~/.config/secrets/env && chmod 600 ~/.config/secrets/env
