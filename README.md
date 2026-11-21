@@ -38,7 +38,7 @@ AI 에이전트(Claude Code·Codex) 여러 개를 **하나의 조직처럼** 운
 | `~/.agents/hooks/session-tidy.sh` | `agents/hooks/session-tidy.sh` |
 | `~/.agents/skills/<이름>`, `~/.claude/skills/<이름>` | `agents/skills/<이름>/` |
 
-홈에만 있는 **개인 기록**(이 저장소에 올리지 않음): `~/.agents/status.md`(비서관 상태 문서), `~/.agents/accounts.md`(키 위치 목록), `~/.agents/glossary-local.md`(오너 줄임말), `~/.config/secrets/env`(비밀 값). 홈 폴더를 원격 없는 git 저장소로 두고 이 기록만 따로 추적해도 된다.
+홈에만 있는 **개인 기록**(이 저장소에 올리지 않음): `~/.agents/status.md`(비서관 상태 문서), `~/.agents/accounts.md`(키 위치 목록), `~/.agents/glossary-local.md`(오너 줄임말), `~/.agents/environment.md`(이 컴퓨터의 상시 가동·재부팅·예약 작업 설명), `~/.config/secrets/env`(비밀 값). 홈 폴더를 원격 없는 git 저장소로 두고 이 기록만 따로 추적해도 된다.
 
 ---
 
@@ -68,6 +68,7 @@ agent-org/
         ├── status.md            비서관 상태 문서 틀
         ├── accounts.md          계정·키 위치 목록 틀
         ├── glossary-local.md    오너 줄임말 틀
+        ├── environment.md       작업 환경 설명 틀
         └── project/             새 프로젝트 폴더 틀
             ├── new-project.sh   틀을 프로젝트 폴더에 복사하는 스크립트
             ├── AGENTS.md        프로젝트 지침 틀
@@ -81,7 +82,7 @@ agent-org/
 ### `install.sh`
 홈 폴더의 정해진 경로에 이 저장소 원본으로 가는 링크를 만든다.
 - 이미 있는 파일(링크가 아닌 것)은 `~/.agents/backup/install-<시각>/`으로 옮긴 뒤 링크한다.
-- 개인 기록 파일 3개는 없을 때만 틀에서 복사한다.
+- 개인 기록 파일 4개는 없을 때만 틀에서 복사한다.
 - 여러 번 실행해도 된다. 새 전역 스킬을 추가했을 때도 다시 실행한다.
 
 ### `global/CLAUDE.md` — 전역 지침
@@ -89,7 +90,7 @@ agent-org/
 
 | 절 | 누가 따르나 | 내용 |
 |---|---|---|
-| 1. 조직 운영 | 모든 에이전트 | 오너·비서관·PM·담당의 권한과 일, 배정·예외 보고·감리·일반 지침 모으기·단어사전·비밀 값 규칙, **지시서 틀**과 **완료 보고 틀** |
+| 1. 조직 운영 | 모든 에이전트 | 오너·비서관·PM·담당의 권한과 일, 배정·예외 보고·감리·작업 환경·일반 지침 모으기·단어사전·비밀 값 규칙, **지시서 틀**과 **완료 보고 틀** |
 | 2. 토큰 절약 | 모든 에이전트 | 필요한 것만 읽기, 계획 먼저, 작게 나눠 진행, 상태 문서 유지, 세션 정리 절차 |
 | 3. 요청 의도 확인 | 오너와 대화하는 에이전트(보통 PM) | 오타·중의성을 정리해 한 번 되묻고 실행 |
 | 4. 코딩 원칙 | 코드를 다루는 에이전트 | `coding-principles.md`를 먼저 읽으라는 안내 |
@@ -138,7 +139,7 @@ Claude Code 훅으로 등록해 쓴다.
 | `org-setup-env` | 새 컴퓨터·새 환경에 이 저장소를 설치할 때 |
 
 ### `agents/templates/` — 틀
-환경마다 내용이 달라 저장소에 올리지 않는 파일의 빈 틀. `status.md`·`accounts.md`·`glossary-local.md`는 `install.sh`가 홈에 복사하고, `project/`는 `new-project.sh`로 새 프로젝트에 복사한다.
+환경마다 내용이 달라 저장소에 올리지 않는 파일의 빈 틀. `status.md`·`accounts.md`·`glossary-local.md`·`environment.md`는 `install.sh`가 홈에 복사하고, `project/`는 `new-project.sh`로 새 프로젝트에 복사한다.
 
 ---
 
