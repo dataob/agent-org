@@ -25,6 +25,7 @@ link global/CLAUDE.md            .codex/AGENTS.md
 link agents/pm-playbook.md       .agents/pm-playbook.md
 link agents/coding-principles.md .agents/coding-principles.md
 link agents/glossary.md          .agents/glossary.md
+link agents/operations.md        .agents/operations.md
 link agents/roles                .agents/roles
 link agents/templates            .agents/templates
 link agents/hooks/session-tidy.sh .agents/hooks/session-tidy.sh
