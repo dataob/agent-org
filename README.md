@@ -186,7 +186,7 @@ Claude Code 훅으로 등록해 쓴다.
      "SessionStart": [{"matcher": "startup|compact|clear", "hooks": [{"type": "command", "command": "~/.agents/hooks/session-tidy.sh", "timeout": 10}]}]
    }
    ```
-5. 홈 폴더에서 세션을 열면 비서관, 프로젝트 폴더에서 열면 PM으로 동작한다.
+5. 홈 폴더 세션은 비서관, 프로젝트 폴더의 `00_<프로젝트> PM` 세션은 PM, 그 밖의 세션은 담당으로 동작한다(프로젝트 폴더당 PM은 한 명).
 
 자세한 절차는 전역 스킬 `org-setup-env`에 있다. 업데이트는 `git -C ~/agent-org pull` 후 필요하면 `install.sh`를 다시 실행한다.
 

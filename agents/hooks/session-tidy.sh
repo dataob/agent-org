@@ -34,7 +34,7 @@ if [ "$event" = "SessionStart" ] && { [ "$source" = "clear" ] || [ "$source" = "
   fi
   [ -z "$status" ] && status="이 프로젝트의 상태 문서(.agents/status.md 또는 PROJECT_STATUS.md)"
   if [ "$source" = "startup" ]; then
-    msg="[세션 시작 안내] 새 세션이다. 첫 답을 하기 전에 먼저 ① 이 세션의 고유 지침(지시서가 있으면 그 \"시작 때 읽을 것\", 없으면 프로젝트 .agents/roles/의 해당 역할 파일. 오너가 직접 연 세션은 PM이므로 PM.md, 홈 폴더는 ~/.agents/roles/secretary.md)과 ② 상태 문서 ${status} 를 읽는다. PM은 전역 지침 1절대로 코드 작성·수정과 수집·배포·예약 같은 실행을 직접 하지 않고 담당에게 배정한다(오너가 '직접 해'라고 한 경우만 예외)."
+    msg="[세션 시작 안내] 새 세션이다. 첫 답을 하기 전에 먼저 ① 이 세션의 역할을 정하고 그 고유 지침(홈 폴더는 비서관 ~/.agents/roles/secretary.md. 제목이 '00_… PM'이거나 오너가 PM이라고 명시했으면 PM: .agents/roles/PM.md. 다른 세션이 시작했거나 지시서가 있거나 제목이 'NN_…'·'임시_…'면 담당: 지시서의 \"시작 때 읽을 것\" 또는 .agents/roles/<담당>.md. 프로젝트 폴더당 PM은 한 명이고 담당은 PM 대행을 하지 않는다. 판단이 안 되면 오너에게 묻는다)과 ② 상태 문서 ${status} 를 읽는다. PM은 전역 지침 1절대로 코드 작성·수정과 수집·배포·예약 같은 실행을 직접 하지 않고 담당에게 배정한다(오너가 '직접 해'라고 한 경우만 예외)."
     jq -n --arg c "$msg" '{systemMessage:"세션 시작 안내를 에이전트에 전달했습니다.", hookSpecificOutput:{hookEventName:"SessionStart", additionalContext:$c}}'
     exit 0
   fi
