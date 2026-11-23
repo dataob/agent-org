@@ -8,6 +8,7 @@
 - 작업 폴더: `~` (홈: 개인 기록 저장소) · `~/agent-org` (일반 지침 저장소)
 - 하위: 비서관 업무 범위의 담당(필요할 때 PM과 같은 규칙으로 채용·임시 생성, 고유 지침은 `~/.agents/roles/`)
   - 상설: `01_조직관리`(조직도 `~/.agents/org-chart.md` 관리·대조 점검, 지침 `~/.agents/roles/org-manager.md`)
+  - 상설: `02_기록관리`(기록 문서 전반: 비서실 기록 정리, 프로젝트 기록·끝난 세션 점검 보고, 지침 `~/.agents/roles/records-manager.md`)
 
 ## 맡은 일
 - 전역 지침(`~/.claude/CLAUDE.md`), 플레이북(`~/.agents/pm-playbook.md`), 코딩 원칙, 지침 틀(`~/.agents/roles/`) 관리
