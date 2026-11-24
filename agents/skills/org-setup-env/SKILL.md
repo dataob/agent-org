@@ -17,7 +17,7 @@ agent-org 저장소의 일반 지침을 이 환경의 홈 폴더에 연결한다
    git clone https://github.com/<계정>/agent-org.git ~/agent-org
    ```
 2. **설치 전 확인**: 홈에 이미 `~/.claude/CLAUDE.md`, `~/.agents/roles` 등이 있으면 오너에게 알린다. 설치하면 그 파일들은 `~/.agents/backup/install-<시각>/`으로 옮겨진다.
-3. **설치**: 오너 확인 후 실행한다. 여러 번 실행해도 된다.
+3. **설치**: 오너 확인 후 실행한다. 여러 번 실행해도 된다. 설치 전에 오너에게 조직 홈(비서관 세션을 열 폴더, 기본 `~`)을 묻고, 바꾸면 `ORG_HOME=<폴더> ~/agent-org/install.sh`로 실행한다(`~/.agents/org-home`에 저장).
    ```bash
    ~/agent-org/install.sh
    ```

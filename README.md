@@ -8,7 +8,7 @@ AI 에이전트(Claude Code·Codex) 여러 개를 **하나의 조직처럼** 운
 
 ```text
 오너(사용자) ── 최종 결정권자
- ├─ 비서관 ──── 홈 폴더(~)에서 연 세션. 전역 지침·틀·전역 스킬 관리, 프로젝트 간 조직 검토
+ ├─ 비서관 ──── 조직 홈(기본 ~)에서 연 세션. 전역 지침·틀·전역 스킬 관리, 프로젝트 간 조직 검토
  └─ PM ──────── 프로젝트 폴더마다 1명. 업무 정리·배정·검증·보고
       └─ 담당 ── 한 분야의 실무 세션(상설 또는 임시)
 ```
@@ -83,6 +83,7 @@ agent-org/
 홈 폴더의 정해진 경로에 이 저장소 원본으로 가는 링크를 만든다.
 - 이미 있는 파일(링크가 아닌 것)은 `~/.agents/backup/install-<시각>/`으로 옮긴 뒤 링크한다.
 - 개인 기록 파일 4개는 없을 때만 틀에서 복사한다.
+- 조직 홈(비서관 폴더)을 `ORG_HOME`으로 정하면 `~/.agents/org-home`에 저장한다. 기록은 조직 홈과 상관없이 `~/.agents`에 둔다.
 - 여러 번 실행해도 된다. 새 전역 스킬을 추가했을 때도 다시 실행한다.
 
 ### `global/CLAUDE.md` — 전역 지침
@@ -115,7 +116,7 @@ agent-org/
 
 | 파일 | 쓰는 법 |
 |---|---|
-| `secretary.md` | 홈 폴더 세션(비서관)이 그대로 읽는다. 두 저장소 관리, agent-org에 올리는 기준과 절차, 프로젝트 지침 수정 절차 |
+| `secretary.md` | 조직 홈 세션(비서관)이 그대로 읽는다. 두 저장소 관리, agent-org에 올리는 기준과 절차, 프로젝트 지침 수정 절차 |
 | `pm.md` | 새 프로젝트의 `.agents/roles/PM.md`로 복사해 `< >`를 채운다 |
 | `member.md` | 담당을 만들 때 `<프로젝트>/.agents/roles/<이름>.md`로 복사해 채운다 |
 
@@ -175,6 +176,10 @@ Claude Code 훅으로 등록해 쓴다.
    ```bash
    ~/agent-org/install.sh
    ```
+   비서관 세션을 홈(`~`)이 아닌 폴더에서 열려면 조직 홈을 정해 설치한다. 값은 `~/.agents/org-home`에 저장되고, 바꿀 때도 같은 명령을 다시 실행한다.
+   ```bash
+   ORG_HOME=~/org ~/agent-org/install.sh
+   ```
 3. 비밀 값 파일 (오너만 편집)
    ```bash
    mkdir -p ~/.config/secrets && touch ~/.config/secrets/env && chmod 600 ~/.config/secrets/env
@@ -186,9 +191,21 @@ Claude Code 훅으로 등록해 쓴다.
      "SessionStart": [{"matcher": "startup|compact|clear", "hooks": [{"type": "command", "command": "~/.agents/hooks/session-tidy.sh", "timeout": 10}]}]
    }
    ```
-5. 홈 폴더 세션은 비서관, 프로젝트 폴더의 `00_<프로젝트> PM` 세션은 PM, 그 밖의 세션은 담당으로 동작한다(프로젝트 폴더당 PM은 한 명).
+5. 조직 홈 세션은 비서관, 프로젝트 폴더의 `00_<프로젝트> PM` 세션은 PM, 그 밖의 세션은 담당으로 동작한다(프로젝트 폴더당 PM은 한 명).
 
 자세한 절차는 전역 스킬 `org-setup-env`에 있다. 업데이트는 `git -C ~/agent-org pull` 후 필요하면 `install.sh`를 다시 실행한다.
+
+### 윈도우에서 설치할 때
+
+스크립트는 macOS 기준이다. 윈도우에서는 **Git Bash**에서 아래처럼 바꿔 실행한다(`~`는 `C:\Users\<이름>`).
+
+| 항목 | 바꿀 것 |
+|---|---|
+| 링크 | 설정 → 개발자 모드를 켜고, 실행 전에 `export MSYS=winsymlinks:nativestrict`. 안 하면 링크 대신 **사본**이 생겨 저장소 수정이 반영되지 않는다 |
+| 줄바꿈 | 받기 전에 `git config --global core.autocrlf input`. `.sh`가 CRLF로 바뀌면 bash가 실행하지 못한다 |
+| 훅 | `jq` 설치(`winget install jqlang.jq`). `session-tidy.sh`의 `stat -f %z`를 `stat -c %s`로 바꾼다(안 바꾸면 크기 알림이 조용히 꺼진다). `settings.json`의 명령은 `bash ~/.agents/hooks/session-tidy.sh`로 쓴다 |
+| 비밀 값 파일 | `chmod 600`은 효과가 없다. 파일 속성 → 보안에서 본인 계정만 읽게 한다 |
+| 예약 작업 | `launchd`(`~/Library/LaunchAgents`) 대신 작업 스케줄러를 쓴다. `environment.md`도 그 기준으로 채운다 |
 
 ---
 
