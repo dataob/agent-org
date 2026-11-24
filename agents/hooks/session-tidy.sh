@@ -4,7 +4,7 @@
 # - SessionStart(compact): 자동 압축 직후 알림
 # - SessionStart(clear): 대화를 비운 직후, 고유 지침·상태 문서를 먼저 읽으라는 안내
 # - SessionStart(startup): 새 세션을 연 직후, 같은 읽기 안내 + PM은 실무를 담당에게 배정한다는 안내
-STEP=${SESSION_TIDY_STEP_BYTES:-2500000}
+STEP=${SESSION_TIDY_STEP_BYTES:-5000000}
 STATE=~/.agents/hooks/.state
 ORG_HOME=$(cat ~/.agents/org-home 2>/dev/null || echo "$HOME")  # 조직 홈(비서관 폴더), install.sh가 정한다
 input=$(cat)
