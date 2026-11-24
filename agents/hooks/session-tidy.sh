@@ -14,7 +14,7 @@ tp=$(printf '%s' "$input" | jq -r '.transcript_path // empty')
 size=0
 [ -n "$tp" ] && [ -f "$tp" ] && size=$(stat -f %z "$tp" 2>/dev/null || echo 0)
 mb=$(awk "BEGIN{printf \"%.1f\", $size/1000000}")
-msg="[세션 정리 알림] 이 대화가 길어졌다(대화 기록 약 ${mb}MB). 전역 지침 2절 '세션 정리'에 따라, 지금 하던 작업 단위를 마무리한 뒤 ① 상태 문서(프로젝트는 .agents/status.md 또는 PROJECT_STATUS.md, 홈 폴더 비서관은 ~/.agents/status.md)를 갱신하고 ② 인수인계 요약을 남기고 ③ 이 세션을 스스로 비워라(앱의 세션 비우기 기능 clear_session, 대상 \"self\"; 도구가 목록에 없으면 ToolSearch로 불러온다). 비우기 직전 오너에게 한 줄로 알린다. 막히면(Remote Control 켜짐, 승인 거부 등) 오너에게 이 세션 입력창에서 /clear를 안내한다. 새 세션은 만들지 않는다(세션 목록 유지). 대화 원본은 남는다."
+msg="[세션 정리 알림] 이 대화가 길어졌다(대화 기록 약 ${mb}MB). 전역 지침 2절 '세션 정리'에 따라, 지금 하던 작업 단위를 마무리한 뒤 ① 상태 문서(프로젝트는 .agents/status.md 또는 PROJECT_STATUS.md, 홈 폴더 비서관은 ~/.agents/status.md)를 갱신하고 ② 인수인계 요약을 남기고 ③ 결재를 받고 세션을 비운다(담당은 업무 내용(한 일·진행 중·다음 할 일·확인 못 한 것)을 정리한 뒤 PM에게, PM·비서관은 오너에게 '세션 비울까요?'로 묻고 승인받은 뒤에만 비운다. 승인을 받으면 다른 일을 더 하지 않고 바로 스스로 비운다. 승인하는 쪽(담당은 PM, PM은 비서관)이 Remote Control 끄기 → 비우기 확인 → 재시작 메시지 → Remote Control 다시 켜기까지 챙긴다(PM은 비우기 전에 비서관에게 업무 보고: 한 일·진행 중·다음 할 일·확인 못 한 것). 방법은 앱의 세션 비우기 기능 clear_session, 대상 \"self\"; 도구가 목록에 없으면 ToolSearch로 불러온다). 막히면(Remote Control 켜짐, 승인 거부 등) 오너에게 이 세션 입력창에서 /clear를 안내한다. 새 세션은 만들지 않는다(세션 목록 유지). 대화 원본은 남는다."
 source=$(printf '%s' "$input" | jq -r '.source // empty')
 if [ "$event" = "SessionStart" ] && { [ "$source" = "clear" ] || [ "$source" = "startup" ]; }; then
   cwd=$(printf '%s' "$input" | jq -r '.cwd // empty')
