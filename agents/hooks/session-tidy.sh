@@ -1,10 +1,10 @@
 #!/bin/bash
 # 세션 정리 알림 훅 (전역 지침 2절 "세션 정리")
-# - UserPromptSubmit: 대화 기록 파일이 기준(STEP)의 배수를 새로 넘을 때마다 한 번 알림
-# - SessionStart(compact): 자동 압축 직후 알림
+# - UserPromptSubmit: 기본은 알림 없음. SESSION_TIDY_STEP_BYTES를 정하면 대화 기록이 그 배수를 새로 넘을 때마다 한 번 알림
+# - SessionStart(compact): 알림 없음(압축은 앱이 알아서 하므로 비울 이유가 아니다)
 # - SessionStart(clear): 대화를 비운 직후, 고유 지침·상태 문서를 먼저 읽으라는 안내
 # - SessionStart(startup): 새 세션을 연 직후, 같은 읽기 안내 + PM은 실무를 담당에게 배정한다는 안내
-STEP=${SESSION_TIDY_STEP_BYTES:-10000000}
+STEP=${SESSION_TIDY_STEP_BYTES:-0}
 STATE=~/.agents/hooks/.state
 ORG_HOME=$(cat ~/.agents/org-home 2>/dev/null || echo "$HOME")  # 조직 홈(비서관 폴더), install.sh가 정한다
 input=$(cat)
@@ -44,10 +44,9 @@ if [ "$event" = "SessionStart" ] && { [ "$source" = "clear" ] || [ "$source" = "
   exit 0
 fi
 if [ "$event" = "SessionStart" ]; then
-  msg="[세션 정리 알림] 방금 대화가 자동 압축됐다. ${msg#*\] }"
-  out_event=SessionStart
+  exit 0
 else
-  [ -z "$sid" ] && exit 0
+  [ -z "$sid" ] || [ "$STEP" -le 0 ] && exit 0
   level=$(( size / STEP ))
   [ "$level" -lt 1 ] && exit 0
   mkdir -p "$STATE"
